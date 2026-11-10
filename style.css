@@ -1,0 +1,285 @@
+ :root{--pink:#ff39aa;--acid:#d7ff3f;--paper:#ecece8;--ink:#171717;--gray:#bcbeb8}*{box-sizing:border-box}body{margin:0;background:var(--gray);color:var(--ink);font-family:'Space Grotesk',Arial,sans-serif}.poster{max-width:1150px;margin:auto;padding:24px;background:var(--paper)}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.issue-line{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:2px solid;font-size:10px;font-weight:700;letter-spacing:.05em}.headline{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:15px 0 24px}.headline p{margin:0;font-size:clamp(20px,3.5vw,40px);font-weight:700;letter-spacing:-.06em}.headline em{font-family:Georgia,serif;font-weight:400}.headline>span{font-size:10px;white-space:nowrap}
+/* RULE 1: Each letter IS one tour stop. All seven repeat the same letter, date, city and expandable venue structure. */
+.tour{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid;border-left:2px solid}.stop{position:relative;min-width:0;background:var(--pink);border-right:2px solid;border-bottom:2px solid}.stop summary{position:relative;min-height:270px;display:flex;flex-direction:column;justify-content:space-between;list-style:none;padding:18px;cursor:pointer;overflow:hidden}.stop summary::-webkit-details-marker{display:none}.letter{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:clamp(110px,18vw,210px);font-weight:900;line-height:.84;letter-spacing:-.06em;position:relative;z-index:1;color:var(--paper)}.tile-meta{display:flex;flex-direction:column;position:relative;z-index:3;gap:3px;padding-top:20px;font-size:11px;font-weight:700;text-transform:uppercase}.city{font-size:15px;line-height:1.1}.date{letter-spacing:.05em}.plus{position:absolute;top:10px;right:13px;font-size:23px;z-index:3}
+/* RULE 2: Repeated stops follow a staggered editorial grid. The sequence always reads T I N A S H E; dark interludes create pauses between letter blocks. */
+.tile-1{grid-column:1;grid-row:1}.tile-2{grid-column:2;grid-row:1}.tile-3{grid-column:1;grid-row:2}.tile-4{grid-column:2;grid-row:2}.tile-5{grid-column:1;grid-row:3}.tile-6{grid-column:2;grid-row:3}.tile-7{grid-column:3;grid-row:3}.tile-2,.tile-5{background:var(--gray)}.tile-3,.tile-6{background:var(--acid)}.tile-3 .letter,.tile-6 .letter{color:var(--ink)}.editorial{grid-column:3/5;grid-row:1/3;background:var(--paper);border-right:2px solid;border-bottom:2px solid;padding:24px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start}.eyebrow{font-size:10px;letter-spacing:.06em}.editorial>p{font-family:'Barlow Condensed',Impact,sans-serif;font-size:clamp(60px,10vw,118px);font-weight:900;line-height:.82;letter-spacing:-.04em;margin:32px 0;z-index:1}.editorial em{font-family:Georgia,serif;font-size:.76em;font-weight:400;color:var(--pink);white-space:nowrap}.caption{font-size:10px;line-height:1.5;z-index:1}.sticker{position:absolute;right:-12px;bottom:50px;background:var(--acid);border:1px solid;border-radius:50%;padding:35px 18px;transform:rotate(-14deg);font-size:20px;font-weight:700;text-align:center}.interlude{grid-column:4;grid-row:3;background:var(--ink);color:var(--acid);border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:15px}.interlude>span{font-size:140px;line-height:1}.interlude p{font-size:19px;font-weight:700;line-height:.85;transform:rotate(-8deg);margin:15px 0}
+/* RULE 3: The camera flash interrupts the letter on hover or keyboard focus. It holds steady, rather than strobing. */
+.flash{position:absolute;top:25px;right:-15px;color:var(--acid);font-size:175px;line-height:1;opacity:0;transform:scale(.5) rotate(-20deg);transition:opacity .18s,transform .18s;pointer-events:none;z-index:2;text-shadow:0 0 14px #ffffff}.stop:nth-child(3n) .flash{color:var(--pink)}summary:hover .flash,summary:focus-visible .flash,.stop[open] .flash{opacity:1;transform:scale(1) rotate(10deg)}summary:focus-visible{outline:4px solid var(--ink);outline-offset:-6px}
+/* RULE 4: Opening any letter reveals its venue within that tile. Date and city stay readable; the practical information has a solid background. */
+.stop-info{position:relative;z-index:4;background:var(--ink);color:var(--paper);padding:15px;font-size:10px;line-height:1.5;display:flex;flex-direction:column;gap:7px}.venue{font-size:16px;font-weight:700}.stop[open] .plus{transform:rotate(45deg)}footer{padding-top:20px;display:flex;justify-content:space-between;gap:18px;font-size:9px;line-height:1.5}a{color:inherit;text-underline-offset:4px}
+/* Narrow-screen revision: use two letter columns, then the editorial panel. Reset all grid positions so TINASHE keeps its reading order. */
+@media(max-width:650px){.poster{padding:12px}.issue-line{font-size:8px}.headline{padding:15px 0;gap:8px}.headline p{font-size:22px}.headline>span{display:none}.tour{grid-template-columns:repeat(2,minmax(0,1fr))}.tour>*{grid-column:auto;grid-row:auto}.stop summary{min-height:230px;padding:14px}.letter{font-size:clamp(105px,32vw,190px)}.city{font-size:13px}.tile-meta{font-size:10px}.editorial{grid-column:1/3;grid-row:5;padding:24px;min-height:390px}.editorial>p{font-size:85px}.sticker{right:15px;bottom:35px}.interlude{grid-column:2;grid-row:4}.interlude>span{font-size:110px}.interlude p{font-size:17px}.flash{font-size:150px}footer{flex-wrap:wrap}footer>a{width:100%}}
+@media(prefers-reduced-motion:reduce){.flash{transition:none}}
+/* Test revision: dark letters improve contrast on the gray tiles. */
+.tile-2 .letter,.tile-5 .letter{color:var(--ink)}
+/* A pointed camera-flash silhouette, rather than an icon from existing artist branding. */
+.flash{width:180px;height:180px;font-size:0;background:var(--acid);clip-path:polygon(50% 0,56% 35%,75% 7%,66% 39%,100% 25%,72% 46%,100% 60%,67% 57%,85% 91%,59% 67%,50% 100%,43% 66%,18% 94%,31% 60%,0 70%,28% 51%,0 33%,36% 40%,25% 5%,45% 34%)}.stop:nth-child(3n) .flash{background:var(--pink)}
+
+/* Revision: closed tiles contain only a full-box letter. All tour information is revealed by pressing the tile. */
+.stop{container-type:inline-size}.stop summary{min-height:0;aspect-ratio:1;padding:0;display:block}.letter{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:Arial,Helvetica,sans-serif;font-size:110cqw;font-weight:900;line-height:.72;letter-spacing:-.08em;padding-right:.08em;transform:scaleX(1.12)}.stop .plus{display:none}.stop-info{position:absolute;inset:0;justify-content:center;align-items:flex-start;padding:24px;pointer-events:none;gap:16px}.stop-info .tile-meta{padding:0;gap:12px}.stop-info .date{font-size:23px}.stop-info .city{font-size:clamp(18px,9cqw,30px);line-height:1.1}.stop-info .venue{font-size:14px}.stop[open] .letter{visibility:hidden}.stop[open] .plus{display:block;color:var(--paper);z-index:6;right:12px;top:6px}.stop[open] .flash{display:none}.stop[open] summary:focus-visible{outline-color:var(--pink);z-index:7}.stop[open] summary{z-index:5}.stop-info{z-index:4}summary:hover .flash,summary:focus-visible .flash{z-index:2}.editorial{min-height:0}.interlude{min-height:0}
+@media(max-width:650px){.stop summary{min-height:0;padding:0}.letter{font-size:110cqw}.stop-info{padding:16px;gap:10px}.stop-info .date{font-size:20px}.stop-info .venue{font-size:12px}.interlude>span{font-size:80px}.interlude p{font-size:14px}.editorial{min-height:390px}}
+
+/* Photo collage revision: one continuous portrait sits behind scattered letter tiles, so the gaps become image windows. */
+.tour{position:relative;grid-template-columns:repeat(4,minmax(0,1fr));isolation:isolate;background:var(--paper)}.photo-grid{grid-column:1/4;grid-row:1/5;position:relative;margin:0;min-width:0;min-height:0;z-index:-1;overflow:hidden;border-right:2px solid;border-bottom:2px solid}.photo-grid>img{position:absolute;width:100%;height:100%;object-fit:cover;object-position:49% center}.tile-1{grid-column:1;grid-row:1}.tile-2{grid-column:3;grid-row:1}.tile-3{grid-column:2;grid-row:2}.tile-4{grid-column:1;grid-row:3}.tile-5{grid-column:3;grid-row:3}.tile-6{grid-column:2;grid-row:4}.tile-7{grid-column:3;grid-row:4}.stop{z-index:1}.editorial{grid-column:4;grid-row:1/5;padding:16px;gap:22px;justify-content:flex-start;overflow:hidden}.rail-headline{position:relative;width:100%;padding-bottom:100px}.rail-headline p{font-family:'Barlow Condensed',Impact,sans-serif;font-size:clamp(34px,4.8vw,58px);font-weight:900;line-height:.85;letter-spacing:-.04em;margin:0}.artist-star{width:115px;height:105px;object-fit:contain;position:absolute;right:0;bottom:-5px}.backstage{margin:0;width:100%;transform:rotate(3deg);border:2px solid var(--pink);background:var(--pink)}.backstage>img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:32% center}.backstage figcaption{font-size:9px;padding:8px;font-weight:700}.editorial .sticker{position:static;align-self:center;border-radius:0;padding:14px;transform:rotate(-8deg);font-size:22px;line-height:.95}.editorial .caption{margin-top:auto;font-size:9px}.eyebrow{font-size:8px}.tile-2,.tile-5{background:var(--pink)}.tile-2 .letter,.tile-5 .letter{color:var(--paper)}
+@media(max-width:650px){.tour{grid-template-columns:repeat(3,minmax(0,1fr))}.photo-grid{grid-column:1/4;grid-row:1/5}.stop summary{aspect-ratio:1}.editorial{grid-column:1/4;grid-row:5;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}.editorial .eyebrow{grid-column:1/3}.rail-headline{grid-column:1;grid-row:2;padding-bottom:100px}.rail-headline p{font-size:40px}.backstage{grid-column:2;grid-row:2/4}.editorial .sticker{grid-column:1;grid-row:3;justify-self:start;font-size:18px}.editorial .caption{grid-column:1/3}.stop-info{padding:10px;gap:5px}.stop-info .tile-meta{gap:5px}.stop-info .date{font-size:14px}.stop-info .city{font-size:16px}.stop-info .venue{font-size:10px}.stop-info>span:last-child{font-size:8px}.stop[open] .plus{font-size:18px;right:5px;top:1px}}
+
+/* Keep the portrait’s eyes visible in the central image window. */
+.tile-3{grid-column:1;grid-row:2}
+
+/* Reference palette: T/A/S are pink with light letters; I/N/H are acid yellow with dark letters; E is light gray with a dark letter. */
+.tile-1{background:var(--pink)}
+.tile-2{background:var(--acid)}
+.tile-3{background:var(--acid)}
+.tile-4{background:var(--pink)}
+.tile-5{background:var(--pink)}
+.tile-6{background:var(--acid)}
+.tile-7{background:#e0e1e3}
+.tile-1 .letter,.tile-4 .letter,.tile-5 .letter{color:var(--paper)}
+.tile-2 .letter,.tile-3 .letter,.tile-6 .letter,.tile-7 .letter{color:var(--ink)}
+.tile-3 .flash,.tile-4 .flash{background:var(--acid)}
+.tile-5 .flash{background:var(--pink)}
+.tile-7 .flash{background:var(--pink)}
+
+/* NEWS-TICKER INTERACTION: The tour information moves continuously like a broadcast banner, repeating seamlessly across the header. */
+.ticker{width:100%;overflow:hidden;border:0;background:var(--ink);color:var(--paper);white-space:nowrap}
+.ticker-track{display:flex;width:max-content;animation:ticker-scroll 34s linear infinite}
+.ticker-set{display:flex;align-items:center;gap:18px;padding:9px 18px;font-size:10px;font-weight:700;letter-spacing:.05em}
+.ticker-set b{color:var(--acid);font-size:11px}
+.ticker-set i{color:var(--pink);font-style:normal;font-size:19px;line-height:.7}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker:hover .ticker-track,.ticker:focus-within .ticker-track{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.ticker-track{animation:none}.ticker-set[aria-hidden="true"]{display:none}}
+@media(max-width:650px){.ticker-set{gap:12px;padding:8px 12px;font-size:9px}.ticker-set b{font-size:10px}}
+
+/* MACBOOK PRO 16-INCH VIEW: At 1728 × 1117, the poster uses the full canvas instead of sitting inside a narrow centered column. The grid gets a viewport-height frame so the complete composition reads as one screen. */
+@media(min-width:1200px){
+  body{background:var(--paper)}
+  .poster{width:100%;max-width:1728px;min-height:100vh;padding:clamp(24px,2.8vw,48px)}
+  .tour{height:calc(100vh - 285px);min-height:700px;max-height:1000px;grid-template-rows:repeat(4,minmax(0,1fr))}
+  .stop{container-type:size}
+  .stop summary{height:100%;min-height:0;aspect-ratio:auto}
+  .stop .letter{font-size:min(110cqw,120cqh)}
+  .photo-grid,.editorial{height:100%}
+}
+
+/* The collage fills the page; the ticker sits directly above it with no masthead or outer margins. */
+.poster{width:100%;max-width:none;padding:0;min-height:100svh}
+/* The long ticker must never determine the width of the page's grid column. */
+.poster>header,.poster>.tour{min-width:0;max-width:100%}
+/* The supplied wordmark replaces POPSTAR in both copies of the looping banner. */
+.ticker-title{display:inline-flex;align-items:center;gap:2px}
+/* Shared separators use the supplied pink star at a fixed size without changing banner height. */
+.ticker-star{display:block;width:19px;height:17px;object-fit:contain;flex-shrink:0;margin:-2px 0}
+.ticker-title .ticker-logo{width:90px;height:30px;object-fit:contain;margin:-8px 0;flex-shrink:0;transform:translateY(1px)}
+/* Flood the original transparency with the exact same #d7ff3f used by the title. */
+.popstar-logo{display:block;filter:url(#popstar-neon)}
+
+/* LIGHTING RULE: All stops share one glow. Each letter changes only its color and arrival delay. */
+.tile-1{--glow:var(--pink);--delay:.2s}
+.tile-2{--glow:var(--acid);--delay:.5s}
+.tile-3{--glow:var(--acid);--delay:.8s}
+.tile-4{--glow:var(--pink);--delay:1.1s}
+.tile-5{--glow:var(--pink);--delay:1.4s}
+.tile-6{--glow:var(--acid);--delay:1.7s}
+.tile-7{--glow:var(--acid);--delay:2s}
+
+/* ARRIVAL STATE: Staggered delays send one .8s glow through each letter on page load. */
+.stop::after{content:"";position:absolute;inset:0;z-index:8;pointer-events:none;opacity:0;box-shadow:inset 0 0 24px #ffffffb3,0 0 30px var(--glow);background:rgb(255 255 255 / .16);animation:tile-light-up .8s ease-in-out var(--delay) 1;transition:opacity .3s ease}
+@keyframes tile-light-up{0%,100%{opacity:0}50%{opacity:1}}
+
+/* INTERACTIVE STATE: The same light stays on during hover or keyboard focus; dates still open on click. */
+@media(hover:hover){.stop:hover{z-index:3}.stop:hover::after{opacity:1!important}}
+.stop:has(summary:focus-visible){z-index:3}
+.stop:has(summary:focus-visible)::after{opacity:1!important}
+/* Reduced-motion visitors get a steady focus/hover state without the arrival animation. */
+@media(prefers-reduced-motion:reduce){.stop::after{animation:none;transition:none}}
+/* PIXEL RULE: Four hard color steps over four seconds = one new color each second.
+   Different phases keep neighboring tiles from all showing the same color.
+   Letter contrast and glow color change with the tile; reduced motion keeps the original palette. */
+@media(prefers-reduced-motion:no-preference){
+ .stop{animation:pixel-colors 4s steps(1,end) var(--phase,0s) infinite}
+ .stop .letter{color:inherit}
+ .tile-1{--phase:0s}
+ .tile-2{--phase:-1s}
+ .tile-3{--phase:-3s}
+ .tile-4{--phase:-2s}
+ .tile-5{--phase:0s}
+ .tile-6{--phase:-1s}
+ .tile-7{--phase:-2s}
+ .stop[open]{animation-play-state:paused}
+}
+@keyframes pixel-colors{
+ 0%,100%{background:var(--pink);color:var(--paper);--glow:var(--pink)}
+ 25%{background:var(--acid);color:var(--ink);--glow:var(--acid)}
+ 50%{background:#e0e1e3;color:var(--ink);--glow:var(--acid)}
+ 75%{background:var(--ink);color:var(--paper);--glow:var(--pink)}
+}
+/* Equal outlines meet on shared tile edges, including edges against the photograph. */
+.tour{border:1px solid #000;gap:0}
+.photo-grid{border:0}
+.stop{border:0;outline:1px solid #000;outline-offset:-1px;border-radius:0}
+/* First-row tiles and the portrait start on the same edge. */
+.tile-1,.tile-2{outline:0;border-right:1px solid #000;border-bottom:1px solid #000}
+.tile-2{border-left:1px solid #000}
+.editorial{border:0;border-left:1px solid #000}
+@media(max-width:650px){.editorial{border-left:0;border-top:1px solid #000}}
+@media(min-width:651px){
+ /* Let the banner take its actual height; the graphic fills all remaining space. */
+ .poster{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);height:100svh;min-height:0}
+ .tour{height:100%;min-height:0;max-height:none;grid-template-rows:repeat(4,minmax(0,1fr))}
+ .stop{container-type:size}
+ .stop summary{height:100%;min-height:0;aspect-ratio:auto}
+ .stop .letter{font-size:min(110cqw,120cqh)}
+ .photo-grid,.editorial{height:100%}
+}
+
+/* Desktop squares: after the 32px banner and 2px outer border, divide the
+   available height into four equal sides. The editorial panel takes the remaining width. */
+@media(min-width:900px) and (min-aspect-ratio:1/1){
+ .poster{grid-template-rows:32px minmax(0,1fr)}
+ .ticker{height:32px;display:flex;align-items:center}
+ .tour{grid-template-columns:repeat(3,calc((100svh - 34px)/4)) minmax(0,1fr)}
+ .editorial{padding:clamp(18px,2vw,32px);gap:16px}
+ .rail-headline{padding-bottom:76px}
+ .rail-headline p{font-size:clamp(48px,5vw,76px)}
+ .artist-star{height:80px;width:88px}
+ .backstage{width:min(100%,360px);align-self:center}
+ .backstage>img{height:38svh;aspect-ratio:auto}
+ .editorial .sticker{font-size:20px;padding:10px 18px}
+}
+
+/* COLLAGE RULE: one flexible canvas holds overlapping media and cutout labels;
+   the video keeps its own screen proportions while the letter grid stays square. */
+.collage-panel{display:flex;padding:clamp(14px,2vw,30px);gap:14px;min-width:0;background:#d0d1d3}
+.collage-panel .eyebrow{width:100%;display:flex;justify-content:space-between;gap:8px;font-size:9px;font-weight:700;color:#fff;border-bottom:1px solid #fff;padding-bottom:8px}
+.collage-panel .rail-headline{padding:0 60px 0 0;flex-shrink:0}
+.collage-panel .rail-headline p{font-size:clamp(36px,4.6vw,72px)}
+.collage-panel .artist-star{width:65px;height:65px;bottom:0}
+.collage-stage{position:relative;flex:1;width:100%;min-height:0;isolation:isolate}
+.video-frame{position:absolute;top:4%;left:2%;width:88%;margin:0;background:var(--ink);color:var(--paper);border:2px solid var(--ink);transform:rotate(-3deg);--cutout-glow:var(--pink)}
+.window-bar{display:flex;justify-content:space-between;gap:8px;background:var(--pink);color:var(--ink);font-size:10px;font-weight:700;padding:7px 9px}
+.video-screen{position:relative;aspect-ratio:16/9;display:grid;place-items:center;background:repeating-linear-gradient(0deg,transparent 0 3px,#ffffff08 3px 4px),radial-gradient(ellipse at center,#343434,#080808);overflow:hidden}
+.cam-label,.timecode{position:absolute;font:9px monospace;letter-spacing:.08em;color:var(--acid)}
+.cam-label{top:12px;left:12px}.timecode{bottom:12px;left:12px}
+.popstar-video{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:contain;background:#000}
+.video-placeholder{display:flex;align-items:center;flex-direction:column;font:10px monospace;letter-spacing:.15em;color:var(--paper);gap:8px}
+.video-placeholder>span{font-size:38px;line-height:1;color:var(--pink)}
+.screen-corner{position:absolute;right:12px;bottom:12px;width:20px;height:16px;border-right:1px solid var(--paper);border-bottom:1px solid var(--paper)}
+.video-frame>figcaption{display:flex;justify-content:space-between;gap:8px;padding:8px;font-size:8px;font-weight:700}
+.video-frame>figcaption>span{color:var(--acid)}
+.collage-callout{position:absolute;z-index:3;font-family:'Barlow Condensed',Impact,sans-serif;font-weight:900;line-height:.9;text-align:center;border:2px solid var(--ink)}
+.uplift{right:-1%;top:0;padding:12px;background:var(--acid);font-size:clamp(24px,3.2vw,48px);transform:rotate(8deg);--cutout-glow:var(--acid)}
+.collage-panel .collage-photo{position:absolute;bottom:2%;right:2%;width:46%;max-width:260px;margin:0;transform:rotate(7deg);z-index:2}
+.collage-panel .collage-photo>img{height:auto;aspect-ratio:4/3;width:100%;object-fit:cover}
+.collage-photo figcaption{font-size:8px;padding:6px}
+.tape{position:absolute;width:65px;height:20px;background:#d7ff3fbd;top:-12px;left:32%;transform:rotate(-12deg);z-index:1}
+.energy{left:2%;bottom:15%;background:var(--pink);padding:12px 18px;transform:rotate(-8deg);font-size:clamp(20px,2.5vw,36px);--cutout-glow:var(--pink)}
+.collage-note{position:absolute;left:5%;bottom:1%;font-size:clamp(9px,1vw,13px);font-weight:700;transform:rotate(-4deg);line-height:1.2}
+.collage-stamp{position:absolute;right:2%;top:55%;z-index:4;background:#fff;color:var(--ink);transform:rotate(10deg);font:700 9px monospace;border:1px solid;padding:8px;text-align:center}
+.collage-footer{display:flex;justify-content:space-between;gap:12px;width:100%;border-top:1px solid;padding-top:8px;font-size:8px;font-weight:700;flex-shrink:0}
+/* Light travels through the collage every three seconds, matching the tile rhythm.
+   These are decorative labels, not inactive playback buttons. */
+.neon-cutout{box-shadow:0 0 8px transparent;transition:box-shadow .3s}
+.neon-cutout:hover{box-shadow:0 0 25px var(--cutout-glow)}
+@media(prefers-reduced-motion:no-preference){
+ .neon-cutout{animation:collage-glow 3s ease-in-out infinite}
+ .uplift{animation-delay:.6s}.energy{animation-delay:1.2s}
+}
+@keyframes collage-glow{0%,60%,100%{box-shadow:0 0 0 transparent}30%{box-shadow:0 0 24px var(--cutout-glow)}}
+/* On narrow screens the collage follows the poster with room for its overlapping layers. */
+@media(max-width:899px){
+ .collage-panel{padding:16px;gap:16px}
+ .collage-panel .eyebrow>span{display:none}
+ .collage-panel .rail-headline p{font-size:36px}
+ .collage-panel .artist-star{width:45px;height:45px}
+ .video-frame{width:96%;left:0;top:10%}
+ .uplift{font-size:24px;padding:9px}
+ .video-frame>figcaption>span{display:none}
+ .collage-panel .collage-photo{width:68%;bottom:8%}
+ .energy{bottom:38%;font-size:23px;padding:8px}
+ .collage-stamp{display:block;top:48%;right:0;font-size:8px}
+ .collage-footer{font-size:7px;flex-wrap:wrap}
+}
+@media(max-width:650px){
+ .collage-panel{display:flex;grid-column:1/4;grid-row:5;min-height:640px}
+ .collage-panel .eyebrow>span{display:inline}
+ .collage-panel .rail-headline p{font-size:48px}
+ .collage-stage{min-height:410px}
+ .video-frame{width:88%;top:5%}
+ .collage-panel .collage-photo{width:51%;bottom:3%}
+ .energy{bottom:20%;font-size:29px}
+ .collage-note{bottom:3%}
+}
+/* The neon yellow artist star replaces the pointer on devices with a mouse. */
+.artist-site{position:absolute;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;min-width:65px}
+.collage-panel .artist-site .artist-star{position:static;display:block}
+.press-me{font:700 10px Arial,sans-serif;white-space:nowrap;transform:rotate(-8deg)}
+.artist-site:focus-visible{outline:2px solid var(--pink);outline-offset:4px}
+.artist-site:hover .artist-star{filter:drop-shadow(0 0 8px var(--pink))}
+/* Equal spacing on both sides of each separator; the title and wordmark stay together. */
+.ticker-set{gap:10px;padding-left:5px;padding-right:5px}
+.ticker-set .ticker-title{gap:4px;font-family:'Barlow Condensed','Arial Narrow',Impact,sans-serif;font-weight:800;font-size:11px;line-height:1;letter-spacing:.025em;align-items:center;flex-shrink:0}
+.ticker-title .ticker-logo{width:104px;height:35px;object-fit:contain;margin:-10px 0;transform:translateY(1px)}
+@media(pointer:fine){body,body *{cursor:url("assets/star-cursor.svg") 21 2,auto}.stop summary,.stop summary *{cursor:url("assets/star-cursor.svg") 21 2,pointer}}
+
+/* Tile alignment: every cell uses the same box sizing and one inset edge.
+   Decorations sit inside that edge, so the glow cannot wash out the dividers. */
+.tour .stop{border:0;outline:0;margin:0;min-height:0;align-self:stretch;container-type:size}
+.tour .stop::before{content:"";position:absolute;inset:0;border:1px solid #000;z-index:10;pointer-events:none}
+.tour .stop::after{inset:1px}
+.tour .stop summary{width:100%;height:100%;min-height:0;aspect-ratio:auto;padding:0;overflow:hidden}
+.tour .stop .letter{transform:none;padding:0;letter-spacing:0;font-size:min(100cqw,116cqh);line-height:1;display:grid;place-items:center}
+/* Explicit equal mobile rows prevent borders and letter metrics from nudging
+   neighboring squares out of alignment. The editorial panel gets its own row. */
+@media(max-width:650px){
+ .tour{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,calc((100vw - 2px)/3)) auto}
+}
+
+/* A small CD case occupies the spare square, leaving the portrait visible around it. */
+.tour .album-slot{grid-column:1;grid-row:4;min-width:0;min-height:0;display:grid;place-items:center;z-index:2;container-type:size}
+.album-link{display:flex;flex-direction:column;align-items:center;gap:7px;width:67%;max-width:74cqh;color:#fff;text-decoration:none;transform:rotate(-9deg);transition:transform .3s}
+.cd-case{display:block;position:relative;width:100%;padding:3px 3px 3px 9px;background:linear-gradient(110deg,#ffffffb3,#8a8a8a80 35%,#ffffffe6);border:1px solid #ffffffda;box-shadow:2px 4px 7px #0006,0 0 16px #ffffffa6}
+.cd-case::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 25%,#ffffff38 26%,transparent 47%);border-left:5px solid #c9c9c97a}
+.cd-case img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.album-label{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:800;font-size:clamp(9px,6cqw,14px);letter-spacing:.08em;line-height:1;background:#171717;padding:4px 8px;white-space:nowrap}
+.album-link:hover,.album-link:focus-visible{transform:rotate(-4deg) scale(1.04)}
+.album-link:focus-visible{outline:2px solid var(--acid);outline-offset:5px}
+@media(prefers-reduced-motion:no-preference){.cd-case{--cutout-glow:#fff;animation:collage-glow 3s ease-in-out .6s infinite}}
+/* Concert backdrop: a light veil preserves headline contrast while the stage remains visible. */
+.collage-panel{background-color:#d0d1d3;background-image:linear-gradient(rgba(208,209,211,.48),rgba(208,209,211,.18) 55%,rgba(0,0,0,.25)),url("assets/concert-backdrop.jpeg");background-size:cover;background-position:center center}
+.collage-panel .eyebrow,.collage-panel .rail-headline p,.collage-panel .press-me{ text-shadow:0 1px 5px #0008 }
+.collage-panel .collage-note{color:#fff;text-shadow:0 1px 4px #000}
+.collage-panel .collage-footer{color:#fff;border-color:#ffffffa6;text-shadow:0 1px 4px #000}
+
+/* White, openly spaced headline pairs with the diagonal linked wordmark. */
+.collage-panel .rail-headline{display:grid;grid-template-columns:minmax(0,1fr) 30%;align-items:center;gap:20px;padding:0}
+.collage-panel .rail-headline p{color:#fff;letter-spacing:.015em;line-height:.98;font-size:clamp(32px,4vw,64px);text-shadow:0 2px 4px #0008,0 0 8px #ffffffb3,0 0 22px #ffffff80}
+.popstar-link{position:static;min-width:0;width:100%;gap:8px;transform:rotate(7deg);align-self:center}
+.linked-sticker{display:block;width:100%;background:#080808;padding:4px 7px;border:1px solid #eee;box-shadow:0 0 10px #ffffffb3,0 0 26px #ffffff80;transition:box-shadow .3s}
+.linked-sticker img{display:block;width:100%;height:auto}
+.collage-panel .popstar-link .press-me{color:#fff;text-shadow:0 1px 4px #000;transform:none}
+/* Persistent halos echo the tiles without restarting their arrival animation. */
+.popstar-link:hover .linked-sticker,.popstar-link:focus-visible .linked-sticker{box-shadow:0 0 15px #fff,0 0 38px #ffffffa6}
+.collage-panel .collage-photo{box-shadow:0 0 12px #ff39aab3,0 0 30px #ff39aa80;transition:box-shadow .3s}
+.collage-panel .collage-photo:hover{box-shadow:0 0 18px var(--pink),0 0 42px #ff39aaa6}
+/* These three halos breathe on the same three-second rhythm as the collage labels. */
+@media(prefers-reduced-motion:no-preference){
+ .collage-panel .rail-headline p{animation:headline-halo 3s ease-in-out infinite}
+ .linked-sticker{--cutout-glow:#fff;animation:collage-glow 3s ease-in-out .3s infinite}
+ .collage-panel .collage-photo{--cutout-glow:var(--pink);animation:collage-glow 3s ease-in-out .9s infinite}
+ .popstar-link:hover .linked-sticker,.popstar-link:focus-visible .linked-sticker,.collage-panel .collage-photo:hover{animation:none}
+}
+@keyframes headline-halo{
+ 0%,60%,100%{text-shadow:0 2px 4px #0008,0 0 2px #ffffff33}
+ 30%{text-shadow:0 2px 4px #0008,0 0 8px #ffffffb3,0 0 22px #ffffff99}
+}
+.collage-panel .energy{bottom:6%}
+@media(min-width:651px) and (max-width:899px){
+ .collage-panel .rail-headline{grid-template-columns:1fr;gap:14px}
+ .popstar-link{width:65%;justify-self:end}
+}
+@media(max-width:650px){
+ .collage-panel .rail-headline{grid-template-columns:minmax(0,1fr) 31%;gap:12px}
+ .collage-panel .rail-headline p{font-size:34px}
+ .collage-panel .popstar-link .press-me{font-size:8px}
+}
